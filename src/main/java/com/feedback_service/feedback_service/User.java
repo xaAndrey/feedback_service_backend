@@ -1,11 +1,12 @@
 package com.feedback_service.feedback_service;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.annotation.Nonnull;
+import jakarta.persistence.*;
+import org.antlr.v4.runtime.misc.NotNull;
+import org.springframework.lang.NonNull;
 
 @Entity
+@Table(name="public_user")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
