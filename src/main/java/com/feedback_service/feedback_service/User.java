@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import org.antlr.v4.runtime.misc.NotNull;
 import org.springframework.lang.NonNull;
 
+import java.util.List;
+
 @Entity
 @Table(name="public_user")
 public class User {
@@ -17,6 +19,10 @@ public class User {
     private String login;
 
     private String pass;
+
+    @OneToMany(mappedBy = "user")
+    private List<Registration> registrations;
+
 
     public Integer getUser_id() {
         return this.user_id;
