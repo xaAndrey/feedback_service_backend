@@ -1,4 +1,4 @@
-Create_db_feedback_service.sql
+src/main/resources/InitDB.sql
 
 
 HELP.md
