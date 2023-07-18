@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.feedback_service</groupId>
-	<artifactId>feedback_service</artifactId>
+	<artifactId>feedback_service_backend</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>feedback_service</name>
-	<description>Server for feedback Service</description>
+	<description>Server for feedback Service Backend</description>
 	<properties>
 		<java.version>20</java.version>
 	</properties>
