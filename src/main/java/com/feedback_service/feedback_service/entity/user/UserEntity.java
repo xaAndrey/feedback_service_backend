@@ -1,7 +1,6 @@
 package com.feedback_service.feedback_service.entity.user;
 
-import com.feedback_service.feedback_service.Registration;
-
+import com.feedback_service.feedback_service.entity.registration.RegistrationEntity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import jakarta.persistence.Id;
@@ -38,7 +37,7 @@ public class UserEntity {
     private boolean accountLocked;
 
     @OneToMany(mappedBy = "user")
-    private List<Registration> registrations;
+    private List<RegistrationEntity> registrationEntities;
 
     public Integer getId() {
         return this.id;
@@ -64,8 +63,8 @@ public class UserEntity {
         return accountLocked;
     }
 
-    public List<Registration> getRegistrations() {
-        return registrations;
+    public List<RegistrationEntity> getRegistrations() {
+        return registrationEntities;
     }
 
     public void setId(Integer id) {
@@ -92,8 +91,8 @@ public class UserEntity {
         this.accountLocked = accountLocked;
     }
 
-    public void setRegistrations(List<Registration> registrations) {
-        this.registrations = registrations;
+    public void setRegistrations(List<RegistrationEntity> registrationEntities) {
+        this.registrationEntities = registrationEntities;
     }
 
     @Override
@@ -111,7 +110,7 @@ public class UserEntity {
             return false;
         if (!Objects.equals(registrationDate, that.registrationDate))
             return false;
-        return Objects.equals(registrations, that.registrations);
+        return Objects.equals(registrationEntities, that.registrationEntities);
     }
 
     @Override
@@ -122,7 +121,7 @@ public class UserEntity {
         result = 31 * result + (securityStamp != null ? securityStamp.hashCode() : 0);
         result = 31 * result + (registrationDate != null ? registrationDate.hashCode() : 0);
         result = 31 * result + (accountLocked ? 1 : 0);
-        result = 31 * result + (registrations != null ? registrations.hashCode() : 0);
+        result = 31 * result + (registrationEntities != null ? registrationEntities.hashCode() : 0);
         return result;
     }
 }
