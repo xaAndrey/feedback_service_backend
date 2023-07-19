@@ -21,7 +21,7 @@ public class UserEntity {
     @Column(name = "user_id", columnDefinition = "INTEGER")
     private Integer id;
 
-    @Column(name="username", columnDefinition = "VARCHAR(256)", nullable = false)
+    @Column(name="username", columnDefinition = "VARCHAR(256)", unique = true, nullable = false)
     private String username;
 
     @Column(name="password", columnDefinition = "VARCHAR(256)", nullable = false)
