@@ -18,7 +18,7 @@ import java.util.Objects;
 public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id", columnDefinition = "INTEGER")
+    @Column(name = "user_id", columnDefinition = "SERIAL")
     private Integer id;
 
     @Column(name="username", columnDefinition = "VARCHAR(256)", unique = true, nullable = false)
@@ -36,7 +36,7 @@ public class UserEntity {
     @Column(name = "account_locked", columnDefinition = "BOOLEAN", nullable = false)
     private boolean accountLocked;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "userEntity")
     private List<RegistrationEntity> registrationEntities;
 
     public Integer getId() {
