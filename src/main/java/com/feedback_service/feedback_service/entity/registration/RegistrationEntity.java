@@ -17,25 +17,25 @@ import java.util.Date;
 public class RegistrationEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="registration_id")
+    @Column(name="registration_id", columnDefinition = "SERIAL")
     private Integer id;
 
-    @Column(name="fio_person")
+    @Column(name="fio_person", columnDefinition = "VARCHAR(256)", nullable = false)
     private String fio;
 
-    @Column(name="phone_number")
+    @Column(name="phone_number", columnDefinition = "VARCHAR(256)", nullable = false)
     private String phone;
 
-    @Column(name="doctor_spec")
+    @Column(name="doctor_spec", columnDefinition = "VARCHAR(256)", nullable = false)
     private String doctor;
 
-    @Column(name="date_registration", columnDefinition = "DATE")
+    @Column(name="date_registration", columnDefinition = "DATE", nullable = false)
     private Date dateRegistration;
 
-    @Column(name="is_registered")
+    @Column(name="is_registered", columnDefinition = "BOOLEAN", nullable = false)
     private boolean isRegistered;
 
-    @Column(name="comments_reg")
+    @Column(name="comments_reg", columnDefinition = "VARCHAR(256)")
     private String comments;
 
     @ManyToOne
