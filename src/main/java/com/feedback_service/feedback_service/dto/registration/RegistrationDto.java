@@ -12,18 +12,11 @@ import java.util.Date;
 @NoArgsConstructor
 public class RegistrationDto {
     private Integer id;
-
     private String fio;
-
     private String phone;
-
     private String doctor;
-
     private Date dateRegistration;
-
     private boolean isRegistered;
-
     private String comments;
-
     private UserDto userDto;
 }
