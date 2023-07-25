@@ -1,6 +1,6 @@
 package com.feedback_service.feedback_service.entity.registration;
 
-import com.feedback_service.feedback_service.entity.user.UserEntity;
+import com.feedback_service.feedback_service.dto.user.UserDto;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import jakarta.persistence.Id;
@@ -10,7 +10,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.JoinColumn;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
 @Table(name="registration")
@@ -30,7 +30,7 @@ public class RegistrationEntity {
     private String doctor;
 
     @Column(name="date_registration", columnDefinition = "DATE", nullable = false)
-    private Date dateRegistration;
+    private LocalDate dateRegistration;
 
     @Column(name="is_registered", columnDefinition = "BOOLEAN", nullable = false)
     private boolean isRegistered;
@@ -40,19 +40,19 @@ public class RegistrationEntity {
 
     @ManyToOne
     @JoinColumn(name="public_user_id", nullable = false)
-    private UserEntity userEntity;
+    private UserDto userDto;
 
     public RegistrationEntity() { }
 
-    public RegistrationEntity(String fio, String phone, String doctor, Date dateRegistration,
-                              boolean isRegistered, String comments, UserEntity userEntity) {
+    public RegistrationEntity(String fio, String phone, String doctor, LocalDate dateRegistration,
+                              boolean isRegistered, String comments, UserDto userDto) {
         this.fio = fio;
         this.phone = phone;
         this.doctor = doctor;
         this.dateRegistration = dateRegistration;
         this.isRegistered = isRegistered;
         this.comments = comments;
-        this.userEntity = userEntity;
+        this.userDto = userDto;
     }
 
     public Integer getId() {
@@ -71,7 +71,7 @@ public class RegistrationEntity {
         return doctor;
     }
 
-    public Date getDateRegistration() {
+    public LocalDate getDateRegistration() {
         return dateRegistration;
     }
 
@@ -83,8 +83,8 @@ public class RegistrationEntity {
         return comments;
     }
 
-    public UserEntity getUser() {
-        return userEntity;
+    public UserDto getUser() {
+        return userDto;
     }
 
     public void setId(Integer id) {
@@ -103,7 +103,7 @@ public class RegistrationEntity {
         this.doctor = doctor;
     }
 
-    public void setDateRegistration(Date dateRegistration) {
+    public void setDateRegistration(LocalDate dateRegistration) {
         this.dateRegistration = dateRegistration;
     }
 
@@ -115,8 +115,8 @@ public class RegistrationEntity {
         this.comments = comments;
     }
 
-    public void setUser(UserEntity userEntity) {
-        this.userEntity = userEntity;
+    public void setUser(UserDto userDto) {
+        this.userDto = userDto;
     }
 
     @Override
@@ -133,7 +133,7 @@ public class RegistrationEntity {
         if (!doctor.equals(that.doctor)) return false;
         if (!dateRegistration.equals(that.dateRegistration)) return false;
         if (!comments.equals(that.comments)) return false;
-        return userEntity.equals(that.userEntity);
+        return userDto.equals(that.userDto);
     }
 
     @Override
@@ -145,7 +145,7 @@ public class RegistrationEntity {
         result = 31 * result + dateRegistration.hashCode();
         result = 31 * result + (isRegistered ? 1 : 0);
         result = 31 * result + comments.hashCode();
-        result = 31 * result + userEntity.hashCode();
+        result = 31 * result + userDto.hashCode();
         return result;
     }
 }
