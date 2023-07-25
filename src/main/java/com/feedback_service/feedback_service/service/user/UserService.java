@@ -7,7 +7,6 @@ import com.feedback_service.feedback_service.exception.UserAlreadyExistException
 import com.feedback_service.feedback_service.exception.UserNotFoundException;
 import com.feedback_service.feedback_service.repository.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -24,7 +23,11 @@ public class UserService {
     private final ModelMapper modelMapper;
 
     @Autowired
-    public UserService(UserRepository userRepository, ModelMapper modelMapper, PasswordEncoder passwordEncoder) {
+    public UserService(
+            UserRepository userRepository,
+            ModelMapper modelMapper,
+            PasswordEncoder passwordEncoder
+    ) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.modelMapper = modelMapper;
@@ -57,7 +60,6 @@ public class UserService {
 
     public UserEntity createUserEntity(CreateUserDto newUser) throws UserAlreadyExistException {
         UserEntity user = modelMapper.map(newUser, UserEntity.class);
-        System.out.println(user);
         user.setPassword(passwordEncoder.encode(newUser.getPassword()));
         user.setSecurityStamp(generateSecurityStamp());
         user.setRegistrationDate(ZonedDateTime.now());
@@ -78,8 +80,8 @@ public class UserService {
         return modelMapper.map(user, UserDto.class);
     }
 
-    private UserEntity convertToEntity(UserDto user) {
-        return modelMapper.map(user, UserEntity.class);
+    private UserDto convertToEntity(UserDto user) {
+        return modelMapper.map(user, UserDto.class);
     }
 
     private String generateSecurityStamp() {
