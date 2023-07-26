@@ -10,6 +10,7 @@ import com.feedback_service.feedback_service.repository.user.UserRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -49,6 +50,19 @@ public class RegistrationService {
 
     public RegistrationDto findRegistrationDtoById(Integer registrationId) throws RegistrationNotFound {
         return convertToDto(findRegistrationEntityById(registrationId));
+    }
+
+    public List<RegistrationEntity> findAllRegistrationEntityByOrderById(Integer page, Integer size) {
+         return registrationRepository.findAllByOrderById(PageRequest.of(page, size));
+    }
+
+    public List<RegistrationDto> findAllRegistrationDtoByOrderById(Integer page, Integer size) {
+        List<RegistrationEntity> newRegistrationEntity = findAllRegistrationEntityByOrderById(page, size);
+        ArrayList<RegistrationDto> newRegistrationDto = new ArrayList<>();
+        for (RegistrationEntity registrationEntity : newRegistrationEntity) {
+            newRegistrationDto.add(convertToDto(registrationEntity));
+        }
+        return newRegistrationDto;
     }
 
     public RegistrationEntity createRegistrationEntity(
