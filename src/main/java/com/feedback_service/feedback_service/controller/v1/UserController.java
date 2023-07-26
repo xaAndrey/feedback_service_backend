@@ -2,10 +2,8 @@ package com.feedback_service.feedback_service.controller.v1;
 
 import com.feedback_service.feedback_service.dto.user.CreateUserDto;
 import com.feedback_service.feedback_service.dto.user.UserDto;
-import com.feedback_service.feedback_service.entity.user.UserEntity;
 import com.feedback_service.feedback_service.exception.UserAlreadyExistException;
 import com.feedback_service.feedback_service.exception.UserNotFoundException;
-import com.feedback_service.feedback_service.repository.user.UserRepository;
 import com.feedback_service.feedback_service.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,13 +17,10 @@ import java.util.List;
 @Controller
 @RequestMapping(path = "/api/v1/users")
 public class UserController {
-
-    private final UserRepository userRepository;
     private final UserService userService;
 
     @Autowired
-    public UserController(UserRepository userRepository, UserService userService) {
-        this.userRepository = userRepository;
+    public UserController(UserService userService) {
         this.userService = userService;
     }
 
