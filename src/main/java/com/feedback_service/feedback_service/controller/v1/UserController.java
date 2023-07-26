@@ -39,7 +39,10 @@ public class UserController {
     }
 
     @PostMapping(path = "/user")
-    public ResponseEntity<UserDto> createUser(@RequestBody CreateUserDto newUser) {
+    public ResponseEntity<UserDto> createUser(
+            @RequestBody CreateUserDto newUser
+    ) throws ResponseStatusException
+    {
         try {
             return ResponseEntity.ok(userService.createUserDto(newUser));
         } catch (UserAlreadyExistException e) {
