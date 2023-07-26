@@ -1,6 +1,6 @@
 package com.feedback_service.feedback_service.entity.registration;
 
-import com.feedback_service.feedback_service.dto.user.UserDto;
+import com.feedback_service.feedback_service.entity.user.UserEntity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import jakarta.persistence.Id;
@@ -40,19 +40,19 @@ public class RegistrationEntity {
 
     @ManyToOne
     @JoinColumn(name="public_user_id", nullable = false)
-    private UserDto userDto;
+    private UserEntity userEntity;
 
     public RegistrationEntity() { }
 
     public RegistrationEntity(String fio, String phone, String doctor, LocalDate dateRegistration,
-                              boolean isRegistered, String comments, UserDto userDto) {
+                              boolean isRegistered, String comments, UserEntity userEntity) {
         this.fio = fio;
         this.phone = phone;
         this.doctor = doctor;
         this.dateRegistration = dateRegistration;
         this.isRegistered = isRegistered;
         this.comments = comments;
-        this.userDto = userDto;
+        this.userEntity = userEntity;
     }
 
     public Integer getId() {
@@ -83,8 +83,8 @@ public class RegistrationEntity {
         return comments;
     }
 
-    public UserDto getUser() {
-        return userDto;
+    public UserEntity getUser() {
+        return userEntity;
     }
 
     public void setId(Integer id) {
@@ -115,8 +115,8 @@ public class RegistrationEntity {
         this.comments = comments;
     }
 
-    public void setUser(UserDto userDto) {
-        this.userDto = userDto;
+    public void setUser(UserEntity userEntity) {
+        this.userEntity = userEntity;
     }
 
     @Override
@@ -133,7 +133,7 @@ public class RegistrationEntity {
         if (!doctor.equals(that.doctor)) return false;
         if (!dateRegistration.equals(that.dateRegistration)) return false;
         if (!comments.equals(that.comments)) return false;
-        return userDto.equals(that.userDto);
+        return userEntity.equals(that.userEntity);
     }
 
     @Override
@@ -145,7 +145,7 @@ public class RegistrationEntity {
         result = 31 * result + dateRegistration.hashCode();
         result = 31 * result + (isRegistered ? 1 : 0);
         result = 31 * result + comments.hashCode();
-        result = 31 * result + userDto.hashCode();
+        result = 31 * result + userEntity.hashCode();
         return result;
     }
 }
