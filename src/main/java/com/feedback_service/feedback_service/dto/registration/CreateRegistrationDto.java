@@ -12,4 +12,5 @@ public class CreateRegistrationDto {
     private String phone;
     private String doctor;
     private String comments;
+    private Integer userId;
 }
