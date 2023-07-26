@@ -3,7 +3,7 @@ package com.feedback_service.feedback_service.service.registration;
 import com.feedback_service.feedback_service.dto.registration.CreateRegistrationDto;
 import com.feedback_service.feedback_service.dto.registration.RegistrationDto;
 import com.feedback_service.feedback_service.entity.registration.RegistrationEntity;
-import com.feedback_service.feedback_service.dto.user.UserDto;
+import com.feedback_service.feedback_service.entity.user.UserEntity;
 import com.feedback_service.feedback_service.exception.RegistrationNotFound;
 import com.feedback_service.feedback_service.repository.registration.RegistrationRepository;
 import com.feedback_service.feedback_service.repository.user.UserRepository;
@@ -52,8 +52,7 @@ public class RegistrationService {
     }
 
     public RegistrationEntity createRegistrationEntity(
-            CreateRegistrationDto newRegistration,
-            Integer userId
+            CreateRegistrationDto newRegistration
     ) throws DataIntegrityViolationException
     {
         RegistrationEntity registration = modelMapper.map(newRegistration, RegistrationEntity.class);
@@ -64,7 +63,7 @@ public class RegistrationService {
         registration.setRegistered(false);
         registration.setComments(registration.getComments());
 
-        UserDto user = modelMapper.map(userRepository.findById(userId).orElseThrow(), UserDto.class);
+        UserEntity user = userRepository.findById(newRegistration.getUserId()).orElseThrow();
         registration.setUser(user);
 
         try {
@@ -79,7 +78,7 @@ public class RegistrationService {
             Integer userId
     ) throws DataIntegrityViolationException
     {
-        return convertToDto(createRegistrationEntity(newRegistration, userId));
+        return convertToDto(createRegistrationEntity(newRegistration));
     }
 
     public RegistrationDto convertToDto(RegistrationEntity registration) {
