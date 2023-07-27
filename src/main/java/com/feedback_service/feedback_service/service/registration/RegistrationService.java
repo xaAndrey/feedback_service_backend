@@ -70,12 +70,9 @@ public class RegistrationService {
     ) throws DataIntegrityViolationException
     {
         RegistrationEntity registration = modelMapper.map(newRegistration, RegistrationEntity.class);
-        registration.setFio(registration.getFio());
-        registration.setPhone(registration.getPhone());
-        registration.setDoctor(registration.getDoctor());
+        registration.setId(null);
         registration.setDateRegistration(LocalDate.now());
         registration.setRegistered(false);
-        registration.setComments(registration.getComments());
 
         UserEntity user = userRepository.findById(newRegistration.getUserId()).orElseThrow();
         registration.setUser(user);
