@@ -4,6 +4,7 @@ import com.feedback_service.feedback_service.dto.registration.CreateRegistration
 import com.feedback_service.feedback_service.dto.registration.RegistrationDto;
 import com.feedback_service.feedback_service.dto.registration.UpdateRegistrationDto;
 import com.feedback_service.feedback_service.service.registration.RegistrationService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
@@ -41,7 +42,7 @@ public class RegistrationController {
 
     @PostMapping(path = "/registration")
     public ResponseEntity<RegistrationDto> createRegistration(
-            @RequestBody CreateRegistrationDto newRegistration
+            @Valid @RequestBody CreateRegistrationDto newRegistration
     ) throws ResponseStatusException
     {
         try {
