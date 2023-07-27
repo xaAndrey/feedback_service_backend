@@ -2,6 +2,7 @@ package com.feedback_service.feedback_service.service.registration;
 
 import com.feedback_service.feedback_service.dto.registration.CreateRegistrationDto;
 import com.feedback_service.feedback_service.dto.registration.RegistrationDto;
+import com.feedback_service.feedback_service.dto.registration.UpdateRegistrationDto;
 import com.feedback_service.feedback_service.entity.registration.RegistrationEntity;
 import com.feedback_service.feedback_service.entity.user.UserEntity;
 import com.feedback_service.feedback_service.exception.RegistrationNotFound;
@@ -90,6 +91,22 @@ public class RegistrationService {
     ) throws DataIntegrityViolationException
     {
         return convertToDto(createRegistrationEntity(newRegistration));
+    }
+
+    public RegistrationEntity updateRegistrationEntity(
+            Integer id,
+            UpdateRegistrationDto updateRegistrationDto
+    ) {
+        RegistrationEntity updateRegistrationEntity = findRegistrationEntityById(id);
+        updateRegistrationEntity.setRegistered(updateRegistrationDto.getIsRegistered());
+        return registrationRepository.save(updateRegistrationEntity);
+    }
+
+    public RegistrationDto updateRegistrationDto(
+            Integer id,
+            UpdateRegistrationDto updateRegistrationDto
+    ) {
+        return convertToDto(updateRegistrationEntity(id, updateRegistrationDto));
     }
 
     public RegistrationDto convertToDto(RegistrationEntity registration) {
