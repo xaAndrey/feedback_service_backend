@@ -3,7 +3,6 @@ package com.feedback_service.feedback_service.controller.v1;
 import com.feedback_service.feedback_service.dto.registration.CreateRegistrationDto;
 import com.feedback_service.feedback_service.dto.registration.RegistrationDto;
 import com.feedback_service.feedback_service.dto.registration.UpdateRegistrationDto;
-import com.feedback_service.feedback_service.entity.registration.RegistrationEntity;
 import com.feedback_service.feedback_service.service.registration.RegistrationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -35,13 +34,9 @@ public class RegistrationController {
     }
 
     @PutMapping(path="/registration/{id}")
-    public ResponseEntity<RegistrationEntity> updateRegistrationById(@PathVariable Integer id,
-                                                                     @RequestBody UpdateRegistrationDto updateRegistrationDto){
-        RegistrationEntity updateRegistrationEntity = registrationService.findRegistrationEntityById(id);
-
-        updateRegistrationEntity.setRegistered(updateRegistrationDto.isRegistered());
-        return ResponseEntity.ok(updateRegistrationEntity);
-
+    public ResponseEntity<RegistrationDto> updateRegistrationById(@PathVariable Integer id,
+                                                                     @Valid @RequestBody UpdateRegistrationDto updateRegistrationDto){
+        return ResponseEntity.ok(registrationService.updateRegistrationDto(id, updateRegistrationDto));
     }
 
     @PostMapping(path = "/registration")
