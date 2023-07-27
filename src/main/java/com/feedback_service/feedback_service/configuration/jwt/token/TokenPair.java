@@ -1,4 +1,4 @@
-package com.feedback_service.feedback_service.configuration.jwt.tocken;
+package com.feedback_service.feedback_service.configuration.jwt.token;
 
 public class TokenPair {
     public String accessToken;
