@@ -1,11 +1,11 @@
 package com.feedback_service.feedback_service.configuration.jwt.token;
 
 public class TokenClaims {
-    public Long id;
+    public Integer id;
     public String securityStamp;
     public TokenType tokenType;
 
-    public TokenClaims(Long id,
+    public TokenClaims(Integer id,
                        String securityStamp,
                        TokenType tokenType) {
         this.id = id;
@@ -13,11 +13,11 @@ public class TokenClaims {
         this.tokenType = tokenType;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

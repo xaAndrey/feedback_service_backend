@@ -46,7 +46,7 @@ public class JwtProvider {
         Claims claims = Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
 
         return new TokenClaims(
-                Long.parseLong(claims.get("ID", String.class)),
+                Integer.parseInt(claims.get("ID", String.class)),
                 claims.get("SECURITY_STAMP", String.class),
                 toTokenType(claims.get("TOKEN_TYPE", String.class))
         );
