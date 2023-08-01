@@ -1,0 +1,34 @@
+{
+  "properties": [
+    {
+      "name": "jwt.issuer",
+      "type": "java.lang.String",
+      "description": "Name of realm who issued the token.",
+      "sourceType": "com.feedback_service.feedback_service.configuration.properties.JwtProperties"
+    },
+    {
+      "name": "jwt.access-secret",
+      "type": "java.lang.String",
+      "description": "Access token secret.",
+      "sourceType": "com.feedback_service.feedback_service.configuration.properties.JwtProperties"
+    },
+    {
+      "name": "jwt.refresh-secret",
+      "type": "java.lang.String",
+      "description": "Refresh token secret.",
+      "sourceType": "com.feedback_service.feedback_service.configuration.properties.JwtProperties"
+    },
+    {
+      "name": "jwt.access-token-expiration-time",
+      "type": "java.lang.Long",
+      "description": "Access token lifetime in milliseconds.",
+      "sourceType": "com.feedback_service.feedback_service.configuration.properties.JwtProperties"
+    },
+    {
+      "name": "jwt.refresh-token-expiration-time",
+      "type": "java.lang.Long",
+      "description": "Refresh token lifetime in milliseconds.",
+      "sourceType": "com.feedback_service.feedback_service.configuration.properties.JwtProperties"
+    }
+  ]
+}

@@ -18,7 +18,7 @@ import static java.util.Objects.requireNonNull;
 
 @Component
 public class JwtProvider {
-    private JwtProperties jwtProperties;
+    private JwtProperties jwtProperties = new JwtProperties();
 
     public JwtProvider() {}
 
@@ -27,9 +27,9 @@ public class JwtProvider {
     }
 
     public TokenPair generateTokenPair(UserEntity user) {
-        String accessToken = generatedToken(user, jwtProperties.accessTokenExpirationTime, TokenType.ACCESS_TOKEN, jwtProperties.accessSecret);
-        String refreshToken = generatedToken(user, jwtProperties.refreshTokenExpirationTime, TokenType.REFRESH_TOKEN, jwtProperties.refreshSecret);
-        return new TokenPair(accessToken, jwtProperties.accessTokenExpirationTime, refreshToken, jwtProperties.refreshTokenExpirationTime);
+        String accessToken = generatedToken(user, jwtProperties.getAccessTokenExpirationTime(), TokenType.ACCESS_TOKEN, jwtProperties.getAccessSecret());
+        String refreshToken = generatedToken(user, jwtProperties.getRefreshTokenExpirationTime(), TokenType.REFRESH_TOKEN, jwtProperties.getRefreshSecret());
+        return new TokenPair(accessToken, jwtProperties.getAccessTokenExpirationTime(), refreshToken, jwtProperties.getRefreshTokenExpirationTime());
     }
 
     public Boolean validateToken(String token, TokenType tokenType) {
@@ -65,7 +65,7 @@ public class JwtProvider {
 
         return Jwts.builder()
                 .setClaims(claims)
-                .setIssuer(jwtProperties.issuer)
+                .setIssuer(jwtProperties.getIssuer())
                 .setExpiration(expirationDate)
                 .signWith(SignatureAlgorithm.HS512, secret)
                 .setHeaderParam("typ", "JWT")
@@ -82,8 +82,8 @@ public class JwtProvider {
 
     private String getSecret(TokenType tokenType) {
         return switch (tokenType) {
-            case ACCESS_TOKEN -> jwtProperties.accessSecret;
-            case REFRESH_TOKEN -> jwtProperties.refreshSecret;
+            case ACCESS_TOKEN -> jwtProperties.getAccessSecret();
+            case REFRESH_TOKEN -> jwtProperties.getRefreshSecret();
             default -> "";
         };
     }

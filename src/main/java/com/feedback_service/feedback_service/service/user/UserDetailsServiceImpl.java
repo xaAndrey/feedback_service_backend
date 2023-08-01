@@ -15,6 +15,8 @@ import java.util.Collections;
 public class UserDetailsServiceImpl implements UserDetailsService {
     private UserService userService;
 
+    public UserDetailsServiceImpl() {}
+
     public UserDetailsServiceImpl(@Lazy UserService userService) {
         this.userService = userService;
     }
