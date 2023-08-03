@@ -3,6 +3,9 @@ package com.feedback_service.feedback_service.service.user;
 import com.feedback_service.feedback_service.configuration.jwt.JwtUserDetails;
 import com.feedback_service.feedback_service.entity.user.UserEntity;
 import com.feedback_service.feedback_service.exception.UserNotFoundException;
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -11,13 +14,14 @@ import org.springframework.stereotype.Service;
 import java.util.Collection;
 import java.util.Collections;
 
+@Getter
+@Setter
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
     private UserService userService;
 
-    public UserDetailsServiceImpl() {}
-
-    public UserDetailsServiceImpl(@Lazy UserService userService) {
+    @Autowired
+    public UserDetailsServiceImpl(UserService userService) {
         this.userService = userService;
     }
 
@@ -28,7 +32,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             throw new UsernameNotFoundException("User with username [" + username + "] not found.");
         }
 
-        return new JwtUserDetails(user, Collections.emptyList());
+        return new JwtUserDetails(user);
     }
 
     public JwtUserDetails loadUserById(Integer id) throws UserNotFoundException {
@@ -37,6 +41,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             throw new UserNotFoundException("User with ID [" + id + "] not found.");
         }
 
-        return new JwtUserDetails(user, Collections.emptyList());
+        return new JwtUserDetails(user);
     }
 }
