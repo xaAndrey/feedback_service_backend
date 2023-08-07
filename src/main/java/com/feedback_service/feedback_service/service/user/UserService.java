@@ -6,8 +6,10 @@ import com.feedback_service.feedback_service.entity.user.UserEntity;
 import com.feedback_service.feedback_service.exception.UserAlreadyExistException;
 import com.feedback_service.feedback_service.exception.UserNotFoundException;
 import com.feedback_service.feedback_service.repository.user.UserRepository;
+import com.feedback_service.feedback_service.util.error.ErrorCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.modelmapper.ModelMapper;
@@ -43,7 +45,7 @@ public class UserService {
     }
 
     public UserEntity findUserEntityById(Integer userId) throws UserNotFoundException {
-        return userRepository.findById(userId).orElseThrow(() -> new UserNotFoundException("User with ID: " + userId + " not found."));
+        return userRepository.findById(userId).orElseThrow(() -> new UserNotFoundException("User with ID: " + userId + " not found.", HttpStatus.NOT_FOUND, ErrorCode.UNF));
     }
 
     public UserDto findUserDtoById(Integer userId) throws UserNotFoundException {
@@ -51,7 +53,7 @@ public class UserService {
     }
 
     public UserEntity findUserEntityByUsername(String username) throws UserNotFoundException {
-        return userRepository.findByUsername(username).orElseThrow(() -> new UserNotFoundException("User with username: " + username + " not found."));
+        return userRepository.findByUsername(username).orElseThrow(() -> new UserNotFoundException("User with username: " + username + " not found.", HttpStatus.NOT_FOUND, ErrorCode.UNF));
     }
 
     public UserDto findUserDtoByUsername(String username) throws UserNotFoundException {

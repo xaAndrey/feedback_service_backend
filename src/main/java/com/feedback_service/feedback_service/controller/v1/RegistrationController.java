@@ -1,5 +1,6 @@
 package com.feedback_service.feedback_service.controller.v1;
 
+import com.feedback_service.feedback_service.dto.PagedResultsDto;
 import com.feedback_service.feedback_service.dto.registration.CreateRegistrationDto;
 import com.feedback_service.feedback_service.dto.registration.RegistrationDto;
 import com.feedback_service.feedback_service.dto.registration.UpdateRegistrationDto;
@@ -25,7 +26,7 @@ public class RegistrationController {
     }
 
     @GetMapping
-    public List<RegistrationDto> findAllByOrderById(@RequestParam Integer page, @RequestParam Integer size) {
+    public PagedResultsDto<RegistrationDto> findAllByOrderById(@RequestParam(required = false) Integer page, @RequestParam(required = false) Integer size) {
         return registrationService.findAllRegistrationDtoByOrderById(page, size);
     }
 
@@ -46,7 +47,7 @@ public class RegistrationController {
     ) throws ResponseStatusException
     {
         try {
-            return ResponseEntity.ok(registrationService.createRegistrationDto(newRegistration, newRegistration.getUserId()));
+            return ResponseEntity.ok(registrationService.createRegistrationDto(newRegistration));
         } catch (DataIntegrityViolationException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }

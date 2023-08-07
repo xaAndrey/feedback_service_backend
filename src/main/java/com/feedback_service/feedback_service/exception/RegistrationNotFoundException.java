@@ -3,13 +3,17 @@ package com.feedback_service.feedback_service.exception;
 import com.feedback_service.feedback_service.util.error.ErrorCode;
 import org.springframework.http.HttpStatus;
 
-public class UserNotFoundException extends ResponseError {
-
-    public UserNotFoundException(
+public class RegistrationNotFoundException extends ResponseError {
+    public RegistrationNotFoundException(
             String message,
             HttpStatus status,
-            String errorCode) {
+            String errorCode
+    ) {
         super(message, status, errorCode);
+    }
+
+    public RegistrationNotFoundException() {
+        super();
     }
 
     public static void registrationNotFoundError(
@@ -22,8 +26,7 @@ public class UserNotFoundException extends ResponseError {
                 errorCode != null) {
             throw new RegistrationNotFoundException(message, status, errorCode);
         } else if (message != null) {
-            throw new RegistrationNotFoundException(message, HttpStatus.NOT_FOUND, ErrorCode.UNF);
+            throw new RegistrationNotFoundException(message, HttpStatus.NOT_FOUND, ErrorCode.RNF);
         }
     }
 }
-
