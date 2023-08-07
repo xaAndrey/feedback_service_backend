@@ -1,0 +1,4 @@
+-- INSERT 3 DATA FIXTURES
+INSERT INTO public_user (user_id, username, password, security_stamp, registration_date, account_locked) values (2, 'test2', '$2a$10$UVp0m1dybULirtc1zmAi7udPeTDCOfTvMn4VW9Rv62jtK2h84QldW', '64d5dda1c9aa4ac4bba116f5c8a62cd3', '2023-07-26T07:11:13.565058Z', false);
+INSERT INTO public_user (user_id, username, password, security_stamp, registration_date, account_locked) VALUES (3, 'test3', '$2a$10$myeuhcgbAkWjxuZI9IDp6eOMA4Y0VKtiCZH.2RcZZGa5hhDEs5BTu', '23f317e6bf7d431d9594d304af715af8', '2023-07-26T07:11:16.504281Z', false);
+INSERT INTO public_user (user_id, username, password, security_stamp, registration_date, account_locked) VALUES (4, 'test4', '$2a$10$wLm/xuZmRYEnfVtKj4IYNuYP4E9mnLr.sK47jOf9WrKfvaFyzeHY.', '89474292a00d4b7c9596704208f908c0', '2023-08-02T07:37:36.06846Z', false);
