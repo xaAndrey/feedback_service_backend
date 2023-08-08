@@ -30,7 +30,7 @@ public class RegistrationEntity {
     private String doctor;
 
     @Column(name="date_registration", columnDefinition = "DATE", nullable = false)
-    private LocalDate dateRegistration;
+    private LocalDateTime dateRegistration;
 
     @Column(name="is_registered", columnDefinition = "BOOLEAN", nullable = false)
     private boolean isRegistered;
