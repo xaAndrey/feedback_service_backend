@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 
 @Getter
 @Setter
@@ -15,7 +15,7 @@ public class RegistrationDto {
     private String fio;
     private String phone;
     private String doctor;
-    private LocalDateTime dateRegistration;
+    private ZonedDateTime dateRegistration;
     private boolean isRegistered;
     private String comments;
     private UserDto userDto;

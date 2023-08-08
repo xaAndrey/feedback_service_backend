@@ -17,7 +17,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -75,7 +75,7 @@ public class RegistrationService {
     ) throws DataIntegrityViolationException {
         RegistrationEntity registration = modelMapper.map(newRegistration, RegistrationEntity.class);
         registration.setId(null);
-        registration.setDateRegistration(LocalDateTime.now());
+        registration.setDateRegistration(ZonedDateTime.now());
         registration.setRegistered(false);
 
         newRegistration.setUserId(1);
