@@ -1,12 +1,16 @@
 package com.feedback_service.feedback_service.configuration.properties;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
+@Getter
+@Setter
 @ConfigurationProperties(prefix = "jwt")
 public class JwtProperties {
-    public String issuer = "VISDOM";
-    public String accessSecret;
-    public String refreshSecret;
-    public Long accessTokenExpirationTime = 3600000L;
-    public Long refreshTokenExpirationTime = 7200000L;
+    private String issuer = "VISDOM";
+    private String accessSecret;
+    private String refreshSecret;
+    private Long accessTokenExpirationTime = 3600000L;
+    private Long refreshTokenExpirationTime = 7200000L;
 }
