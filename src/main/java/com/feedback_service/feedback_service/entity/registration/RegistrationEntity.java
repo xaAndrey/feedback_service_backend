@@ -1,14 +1,12 @@
 package com.feedback_service.feedback_service.entity.registration;
 
-import com.feedback_service.feedback_service.entity.user.UserEntity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import jakarta.persistence.Id;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Column;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.JoinColumn;
+
 
 import java.time.ZonedDateTime;
 
@@ -38,21 +36,16 @@ public class RegistrationEntity {
     @Column(name="comments_reg", columnDefinition = "VARCHAR(256)")
     private String comments;
 
-    @ManyToOne
-    @JoinColumn(name="public_user_id", nullable = false)
-    private UserEntity userEntity;
-
     public RegistrationEntity() { }
 
     public RegistrationEntity(String fio, String phone, String doctor, ZonedDateTime dateRegistration,
-                              boolean isRegistered, String comments, UserEntity userEntity) {
+                              boolean isRegistered, String comments) {
         this.fio = fio;
         this.phone = phone;
         this.doctor = doctor;
         this.dateRegistration = dateRegistration;
         this.isRegistered = isRegistered;
         this.comments = comments;
-        this.userEntity = userEntity;
     }
 
     public Integer getId() {
@@ -83,10 +76,6 @@ public class RegistrationEntity {
         return comments;
     }
 
-    public UserEntity getUser() {
-        return userEntity;
-    }
-
     public void setId(Integer id) {
         this.id = id;
     }
@@ -115,10 +104,6 @@ public class RegistrationEntity {
         this.comments = comments;
     }
 
-    public void setUser(UserEntity userEntity) {
-        this.userEntity = userEntity;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -132,8 +117,7 @@ public class RegistrationEntity {
         if (!phone.equals(that.phone)) return false;
         if (!doctor.equals(that.doctor)) return false;
         if (!dateRegistration.equals(that.dateRegistration)) return false;
-        if (!comments.equals(that.comments)) return false;
-        return userEntity.equals(that.userEntity);
+        return  comments.equals(that.comments);
     }
 
     @Override
@@ -145,7 +129,6 @@ public class RegistrationEntity {
         result = 31 * result + dateRegistration.hashCode();
         result = 31 * result + (isRegistered ? 1 : 0);
         result = 31 * result + comments.hashCode();
-        result = 31 * result + userEntity.hashCode();
         return result;
     }
 }

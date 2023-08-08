@@ -36,9 +36,6 @@ public class UserEntity {
     @Column(name = "account_locked", columnDefinition = "BOOLEAN", nullable = false)
     private boolean accountLocked;
 
-    @OneToMany(mappedBy = "userEntity")
-    private List<RegistrationEntity> registrationEntities;
-
     public Integer getId() {
         return this.id;
     }
@@ -61,10 +58,6 @@ public class UserEntity {
 
     public boolean isAccountLocked() {
         return accountLocked;
-    }
-
-    public List<RegistrationEntity> getRegistrations() {
-        return registrationEntities;
     }
 
     public void setId(Integer id) {
@@ -91,9 +84,6 @@ public class UserEntity {
         this.accountLocked = accountLocked;
     }
 
-    public void setRegistrations(List<RegistrationEntity> registrationEntities) {
-        this.registrationEntities = registrationEntities;
-    }
 
     @Override
     public boolean equals(Object other) {
@@ -108,9 +98,7 @@ public class UserEntity {
         if (!Objects.equals(password, that.password)) return false;
         if (!Objects.equals(securityStamp, that.securityStamp))
             return false;
-        if (!Objects.equals(registrationDate, that.registrationDate))
-            return false;
-        return Objects.equals(registrationEntities, that.registrationEntities);
+        return Objects.equals(registrationDate, that.registrationDate);
     }
 
     @Override
@@ -121,7 +109,6 @@ public class UserEntity {
         result = 31 * result + (securityStamp != null ? securityStamp.hashCode() : 0);
         result = 31 * result + (registrationDate != null ? registrationDate.hashCode() : 0);
         result = 31 * result + (accountLocked ? 1 : 0);
-        result = 31 * result + (registrationEntities != null ? registrationEntities.hashCode() : 0);
         return result;
     }
 }

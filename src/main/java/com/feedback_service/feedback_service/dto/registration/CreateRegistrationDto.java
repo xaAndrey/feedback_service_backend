@@ -17,5 +17,4 @@ public class CreateRegistrationDto {
     @NotBlank
     private String doctor;
     private String comments;
-    private Integer userId;
 }
