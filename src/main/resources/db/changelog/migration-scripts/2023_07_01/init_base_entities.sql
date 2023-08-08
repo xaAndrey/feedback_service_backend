@@ -17,6 +17,5 @@ CREATE TABLE IF NOT EXISTS registration (
 	date_registration timestamptz NOT NULL,
 	is_registered bool NOT NULL,
 	comments_reg varchar(256) NULL,
-	public_user_id int4 NOT NULL,
 	CONSTRAINT registration_pkey PRIMARY KEY (registration_id)
 );

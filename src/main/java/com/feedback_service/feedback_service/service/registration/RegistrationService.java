@@ -78,11 +78,6 @@ public class RegistrationService {
         registration.setDateRegistration(ZonedDateTime.now());
         registration.setRegistered(false);
 
-        newRegistration.setUserId(1);
-
-        UserEntity user = userRepository.findById(newRegistration.getUserId()).orElseThrow();
-        registration.setUser(user);
-
         try {
             return registrationRepository.save(registration);
         } catch (Exception e) {

@@ -18,5 +18,4 @@ public class RegistrationDto {
     private ZonedDateTime dateRegistration;
     private boolean isRegistered;
     private String comments;
-    private UserDto userDto;
 }
