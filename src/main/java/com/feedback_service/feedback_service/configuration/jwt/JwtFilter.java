@@ -10,18 +10,19 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.lang.NonNull;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
+import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 import java.util.Objects;
 
+@Component
 public class JwtFilter extends OncePerRequestFilter {
     private final String AUTHORIZATION = "Authorization";
 
-    private final JwtProvider jwtProvider;
-    private final UserDetailsServiceImpl userDetailsService;
+    private JwtProvider jwtProvider;
+    private UserDetailsServiceImpl userDetailsService = new UserDetailsServiceImpl();
 
     public JwtFilter(JwtProvider jwtProvider, UserDetailsServiceImpl userDetailsService) {
         this.jwtProvider = jwtProvider;
