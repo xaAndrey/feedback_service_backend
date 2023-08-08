@@ -1,0 +1,33 @@
+version: '3.8'
+services:
+  postgres-server:
+    image: postgres:15
+    container_name: postgres
+    restart: unless-stopped
+    environment:
+      - POSTGRES_DB=test_db
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - PGDATA=/data/postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres:/data/postgres
+      - ./src/main/resources/db/initdb/:/docker-entrypoint-initdb.d
+
+  feedback-service-app:
+    build: .
+    container_name: feedback-service-app
+    environment:
+      - spring.profiles.active=dev
+      - spring.datasource.url=jdbc:postgresql://postgres-server/test_db
+      - spring.datasource.hikari.username=postgres
+      - spring.datasource.hikari.password=postgres
+    ports:
+      - "8080:8080"
+    links:
+      - postgres-server
+
+volumes:
+  postgres:
+    driver: local

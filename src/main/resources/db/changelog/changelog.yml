@@ -1,0 +1,9 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: a.pisarev
+      changes:
+        - sqlFile:
+            dbms: postgresql
+            path: migration-scripts/2023_07_01/init_base_entities.sql
+            relativeToChangelogFile: true

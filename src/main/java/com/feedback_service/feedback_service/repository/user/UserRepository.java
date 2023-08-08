@@ -8,4 +8,5 @@ import java.util.Optional;
 public interface UserRepository extends JpaRepository<UserEntity, Integer> {
     Optional<UserEntity> getBySecurityStamp(String securityStamp);
     Optional<UserEntity> findByUsername(String username);
+    boolean existsByIdIsGreaterThan(Integer id);
 }

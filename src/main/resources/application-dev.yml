@@ -4,20 +4,19 @@ server:
     include-binding-errors: always
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/feedback_service
+    url: jdbc:postgresql://localhost:5432/test_db
     hikari:
       jdbc-url: ${spring.datasource.url}
+      schema: feedback_service
       username: postgres
-      password: root
+      password: postgres
       pool-name: main-db-pool
   jpa:
     properties:
       hibernate:
-        default_schema: public
+        default_schema: feedback_service
     show-sql: false
     open-in-view: true
-  liquibase:
-    default-schema: public
 jwt:
   issuer: VISDOM
   access-secret: FGHJKL21!jwiwQ
