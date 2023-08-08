@@ -1,4 +1,4 @@
-CREATE TABLE public_user (
+CREATE TABLE IF NOT EXISTS public_user (
 	user_id int4 NOT NULL GENERATED ALWAYS AS IDENTITY( INCREMENT BY 1 MINVALUE 1 MAXVALUE 2147483647 START 1 CACHE 1 NO CYCLE),
 	"password" varchar(256) NOT NULL,
 	username varchar(256) NOT NULL,
@@ -9,7 +9,7 @@ CREATE TABLE public_user (
 	CONSTRAINT unique_user_username UNIQUE (username)
 );
 
-CREATE TABLE registration (
+CREATE TABLE IF NOT EXISTS registration (
 	registration_id int4 NOT NULL GENERATED ALWAYS AS IDENTITY( INCREMENT BY 1 MINVALUE 1 MAXVALUE 2147483647 START 1 CACHE 1 NO CYCLE),
 	fio_person varchar(256) NOT NULL,
 	phone_number varchar(256) NOT NULL,
