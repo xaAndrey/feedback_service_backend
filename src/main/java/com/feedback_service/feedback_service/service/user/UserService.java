@@ -86,6 +86,10 @@ public class UserService {
         return modelMapper.map(user, UserDto.class);
     }
 
+    public boolean anyUserExists() {
+       return userRepository.existsByIdIsGreaterThan(0);
+    }
+
     private String generateSecurityStamp() {
         String securityStamp;
         do {

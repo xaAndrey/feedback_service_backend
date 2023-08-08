@@ -10,7 +10,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.JoinColumn;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name="registration")
@@ -29,7 +29,7 @@ public class RegistrationEntity {
     @Column(name="doctor_spec", columnDefinition = "VARCHAR(256)", nullable = false)
     private String doctor;
 
-    @Column(name="date_registration", columnDefinition = "DATE", nullable = false)
+    @Column(name="date_registration", columnDefinition = "TIMESTAMP", nullable = false)
     private LocalDateTime dateRegistration;
 
     @Column(name="is_registered", columnDefinition = "BOOLEAN", nullable = false)
@@ -44,7 +44,7 @@ public class RegistrationEntity {
 
     public RegistrationEntity() { }
 
-    public RegistrationEntity(String fio, String phone, String doctor, LocalDate dateRegistration,
+    public RegistrationEntity(String fio, String phone, String doctor, LocalDateTime dateRegistration,
                               boolean isRegistered, String comments, UserEntity userEntity) {
         this.fio = fio;
         this.phone = phone;
@@ -71,7 +71,7 @@ public class RegistrationEntity {
         return doctor;
     }
 
-    public LocalDate getDateRegistration() {
+    public LocalDateTime getDateRegistration() {
         return dateRegistration;
     }
 
@@ -103,7 +103,7 @@ public class RegistrationEntity {
         this.doctor = doctor;
     }
 
-    public void setDateRegistration(LocalDate dateRegistration) {
+    public void setDateRegistration(LocalDateTime dateRegistration) {
         this.dateRegistration = dateRegistration;
     }
 

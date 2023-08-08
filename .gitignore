@@ -1,4 +1,4 @@
-src/main/resources/db/InitDB.sql
+src/main/resources/db/initdb/init_db.sql
 
 
 HELP.md

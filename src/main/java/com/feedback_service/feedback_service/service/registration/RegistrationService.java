@@ -7,7 +7,6 @@ import com.feedback_service.feedback_service.dto.registration.UpdateRegistration
 import com.feedback_service.feedback_service.entity.registration.RegistrationEntity;
 import com.feedback_service.feedback_service.entity.user.UserEntity;
 import com.feedback_service.feedback_service.exception.RegistrationNotFoundException;
-import com.feedback_service.feedback_service.exception.ResponseError;
 import com.feedback_service.feedback_service.repository.registration.RegistrationRepository;
 import com.feedback_service.feedback_service.repository.user.UserRepository;
 import com.feedback_service.feedback_service.util.error.ErrorCode;
@@ -18,11 +17,9 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-
-import static com.feedback_service.feedback_service.exception.RegistrationNotFoundException.registrationNotFoundError;
 
 @Service
 public class RegistrationService {
@@ -78,7 +75,7 @@ public class RegistrationService {
     ) throws DataIntegrityViolationException {
         RegistrationEntity registration = modelMapper.map(newRegistration, RegistrationEntity.class);
         registration.setId(null);
-        registration.setDateRegistration(LocalDate.now());
+        registration.setDateRegistration(LocalDateTime.now());
         registration.setRegistered(false);
 
         newRegistration.setUserId(1);
