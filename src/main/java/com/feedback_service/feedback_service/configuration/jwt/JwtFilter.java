@@ -20,9 +20,8 @@ import java.util.Objects;
 @Component
 public class JwtFilter extends OncePerRequestFilter {
     private final String AUTHORIZATION = "Authorization";
-
     private JwtProvider jwtProvider;
-    private UserDetailsServiceImpl userDetailsService = new UserDetailsServiceImpl();
+    private UserDetailsServiceImpl userDetailsService;
 
     public JwtFilter(JwtProvider jwtProvider, UserDetailsServiceImpl userDetailsService) {
         this.jwtProvider = jwtProvider;
