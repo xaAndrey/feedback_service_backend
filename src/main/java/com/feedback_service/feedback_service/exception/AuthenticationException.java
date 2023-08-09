@@ -2,19 +2,14 @@ package com.feedback_service.feedback_service.exception;
 
 import org.springframework.http.HttpStatus;
 
-public class AuthenticationException extends RuntimeException {
-    private String message;
-    private HttpStatus status;
-    private String errorCode;
+public class AuthenticationException extends ResponseError {
 
     public AuthenticationException(
             String message,
             HttpStatus status,
             String errorCode
     ) {
-        this.message = message;
-        this.status = status;
-        this.errorCode = errorCode;
+        super(message, status, errorCode);
     }
 
     public static void authenticationError(
