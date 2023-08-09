@@ -5,7 +5,6 @@ import com.feedback_service.feedback_service.dto.registration.CreateRegistration
 import com.feedback_service.feedback_service.dto.registration.RegistrationDto;
 import com.feedback_service.feedback_service.dto.registration.UpdateRegistrationDto;
 import com.feedback_service.feedback_service.entity.registration.RegistrationEntity;
-import com.feedback_service.feedback_service.entity.user.UserEntity;
 import com.feedback_service.feedback_service.exception.RegistrationNotFoundException;
 import com.feedback_service.feedback_service.repository.registration.RegistrationRepository;
 import com.feedback_service.feedback_service.repository.user.UserRepository;
@@ -17,9 +16,13 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+
 
 @Service
 public class RegistrationService {
@@ -30,8 +33,7 @@ public class RegistrationService {
     @Autowired
     public RegistrationService(
             RegistrationRepository registrationRepository,
-            ModelMapper modelMapper,
-            UserRepository userRepository
+            ModelMapper modelMapper, UserRepository userRepository
     ) {
         this.registrationRepository = registrationRepository;
         this.modelMapper = modelMapper;
@@ -77,6 +79,17 @@ public class RegistrationService {
         registration.setId(null);
         registration.setDateRegistration(ZonedDateTime.now());
         registration.setRegistered(false);
+
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yy").withZone(ZoneId.of("Europe/Moscow"));
+            LocalDate date = LocalDate.parse(newRegistration.getDate(), formatter);
+            ZonedDateTime result = date.atStartOfDay(ZoneId.systemDefault());
+            registration.setDate(result);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            registration.setDate(ZonedDateTime.now());
+        }
+
 
         try {
             return registrationRepository.save(registration);
