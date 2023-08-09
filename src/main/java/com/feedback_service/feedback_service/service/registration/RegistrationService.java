@@ -57,7 +57,7 @@ public class RegistrationService {
     }
 
     public List<RegistrationEntity> findAllRegistrationEntityByOrderById(Integer page, Integer size) {
-         return registrationRepository.findAllByOrderById(PageRequest.of(page, size));
+        return registrationRepository.findAllByOrderById(PageRequest.of(page, size));
     }
 
     public PagedResultsDto<RegistrationDto> findAllRegistrationDtoByOrderById(Integer page, Integer size) {
@@ -72,8 +72,7 @@ public class RegistrationService {
 
     public RegistrationEntity createRegistrationEntity(
             CreateRegistrationDto newRegistration
-    ) throws DataIntegrityViolationException
-    {
+    ) throws DataIntegrityViolationException {
         RegistrationEntity registration = modelMapper.map(newRegistration, RegistrationEntity.class);
         registration.setId(null);
         registration.setDateRegistration(LocalDate.now());
@@ -93,10 +92,8 @@ public class RegistrationService {
     }
 
     public RegistrationDto createRegistrationDto(
-            CreateRegistrationDto newRegistration,
-            Integer userId
-    ) throws DataIntegrityViolationException
-    {
+            CreateRegistrationDto newRegistration
+    ) throws DataIntegrityViolationException {
         return convertToDto(createRegistrationEntity(newRegistration));
     }
 
