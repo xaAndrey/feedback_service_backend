@@ -86,8 +86,9 @@ public class RegistrationService {
 
         try {
             return registrationRepository.save(registration);
-        } catch (DataIntegrityViolationException e) {
-            throw new DataIntegrityViolationException("Registration don't create");
+        } catch (Exception e) {
+            System.err.println("Don't create registrations: " + e.getMessage());
+            throw new RuntimeException();
         }
     }
 
