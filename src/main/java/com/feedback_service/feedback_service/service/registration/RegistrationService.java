@@ -1,17 +1,20 @@
 package com.feedback_service.feedback_service.service.registration;
 
+import com.feedback_service.feedback_service.dto.PagedResultsDto;
 import com.feedback_service.feedback_service.dto.registration.CreateRegistrationDto;
 import com.feedback_service.feedback_service.dto.registration.RegistrationDto;
 import com.feedback_service.feedback_service.dto.registration.UpdateRegistrationDto;
 import com.feedback_service.feedback_service.entity.registration.RegistrationEntity;
 import com.feedback_service.feedback_service.entity.user.UserEntity;
-import com.feedback_service.feedback_service.exception.RegistrationNotFound;
+import com.feedback_service.feedback_service.exception.RegistrationNotFoundException;
 import com.feedback_service.feedback_service.repository.registration.RegistrationRepository;
 import com.feedback_service.feedback_service.repository.user.UserRepository;
+import com.feedback_service.feedback_service.util.error.ErrorCode;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -45,11 +48,11 @@ public class RegistrationService {
         return newRegistrationDto;
     }
 
-    public RegistrationEntity findRegistrationEntityById(Integer registrationId) throws RegistrationNotFound {
-        return registrationRepository.findById(registrationId).orElseThrow(() -> new RegistrationNotFound("Registration with ID: " + registrationId + " not found."));
+    public RegistrationEntity findRegistrationEntityById(Integer registrationId) throws RegistrationNotFoundException {
+        return registrationRepository.findById(registrationId).orElseThrow(() -> new RegistrationNotFoundException("Registration with ID: " + registrationId + " not found.", HttpStatus.NOT_FOUND, ErrorCode.RNF));
     }
 
-    public RegistrationDto findRegistrationDtoById(Integer registrationId) throws RegistrationNotFound {
+    public RegistrationDto findRegistrationDtoById(Integer registrationId) throws RegistrationNotFoundException {
         return convertToDto(findRegistrationEntityById(registrationId));
     }
 
@@ -57,13 +60,14 @@ public class RegistrationService {
          return registrationRepository.findAllByOrderById(PageRequest.of(page, size));
     }
 
-    public List<RegistrationDto> findAllRegistrationDtoByOrderById(Integer page, Integer size) {
+    public PagedResultsDto<RegistrationDto> findAllRegistrationDtoByOrderById(Integer page, Integer size) {
         List<RegistrationEntity> newRegistrationEntity = findAllRegistrationEntityByOrderById(page, size);
         ArrayList<RegistrationDto> newRegistrationDto = new ArrayList<>();
         for (RegistrationEntity registrationEntity : newRegistrationEntity) {
             newRegistrationDto.add(convertToDto(registrationEntity));
         }
-        return newRegistrationDto;
+        Integer count = newRegistrationDto.size();
+        return new PagedResultsDto<>(newRegistrationDto, count);
     }
 
     public RegistrationEntity createRegistrationEntity(
