@@ -32,7 +32,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             throw new UsernameNotFoundException("User with username [" + username + "] not found.");
         }
 
-        return new JwtUserDetails(user, Collections.emptyList());
+        return new JwtUserDetails(user);
     }
 
     public JwtUserDetails loadUserById(Integer id) throws UserNotFoundException {
@@ -41,6 +41,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             throw new UserNotFoundException("User with ID [" + id + "] not found.");
         }
 
-        return new JwtUserDetails(user, Collections.emptyList());
+        return new JwtUserDetails(user);
     }
 }
