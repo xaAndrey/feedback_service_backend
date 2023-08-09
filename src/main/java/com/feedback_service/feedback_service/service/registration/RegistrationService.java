@@ -79,6 +79,8 @@ public class RegistrationService {
         registration.setDateRegistration(LocalDate.now());
         registration.setRegistered(false);
 
+        newRegistration.setUserId(1);
+
         UserEntity user = userRepository.findById(newRegistration.getUserId()).orElseThrow();
         registration.setUser(user);
 
