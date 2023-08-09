@@ -16,5 +16,7 @@ public class CreateRegistrationDto {
     private String phone;
     @NotBlank
     private String doctor;
+    @NotBlank
+    private String date;
     private String comments;
 }

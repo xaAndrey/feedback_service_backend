@@ -36,6 +36,9 @@ public class RegistrationEntity {
     @Column(name="comments_reg", columnDefinition = "VARCHAR(256)")
     private String comments;
 
+    @Column(name="date_user", columnDefinition = "TIMESTAMP", nullable = false)
+    private ZonedDateTime date;
+
     public RegistrationEntity() { }
 
     public RegistrationEntity(String fio, String phone, String doctor, ZonedDateTime dateRegistration,
@@ -76,6 +79,10 @@ public class RegistrationEntity {
         return comments;
     }
 
+    public ZonedDateTime getDate() {
+        return date;
+    }
+
     public void setId(Integer id) {
         this.id = id;
     }
@@ -104,6 +111,10 @@ public class RegistrationEntity {
         this.comments = comments;
     }
 
+    public void setDate(ZonedDateTime date) {
+        this.date = date;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -117,6 +128,7 @@ public class RegistrationEntity {
         if (!phone.equals(that.phone)) return false;
         if (!doctor.equals(that.doctor)) return false;
         if (!dateRegistration.equals(that.dateRegistration)) return false;
+        if(!date.equals(that.date)) return false;
         return  comments.equals(that.comments);
     }
 
@@ -128,6 +140,7 @@ public class RegistrationEntity {
         result = 31 * result + doctor.hashCode();
         result = 31 * result + dateRegistration.hashCode();
         result = 31 * result + (isRegistered ? 1 : 0);
+        result = 31 * result + date.hashCode();
         result = 31 * result + comments.hashCode();
         return result;
     }

@@ -16,6 +16,7 @@ public class RegistrationDto {
     private String phone;
     private String doctor;
     private ZonedDateTime dateRegistration;
+    private ZonedDateTime date;
     private boolean isRegistered;
     private String comments;
 }

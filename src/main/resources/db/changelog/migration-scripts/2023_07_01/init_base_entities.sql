@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS public_user (
 	CONSTRAINT unique_user_username UNIQUE (username)
 );
 
-CREATE TABLE IF NOT EXISTS registration (
+CREATE TABLE IF NOT EXISTS  feedback_service.registration (
 	registration_id int4 NOT NULL GENERATED ALWAYS AS IDENTITY( INCREMENT BY 1 MINVALUE 1 MAXVALUE 2147483647 START 1 CACHE 1 NO CYCLE),
 	fio_person varchar(256) NOT NULL,
 	phone_number varchar(256) NOT NULL,
@@ -17,5 +17,6 @@ CREATE TABLE IF NOT EXISTS registration (
 	date_registration timestamptz NOT NULL,
 	is_registered bool NOT NULL,
 	comments_reg varchar(256) NULL,
+	date_user timestamptz NULL,
 	CONSTRAINT registration_pkey PRIMARY KEY (registration_id)
 );
