@@ -18,7 +18,7 @@ import static java.util.Objects.requireNonNull;
 
 @Component
 public class JwtProvider {
-    private JwtProperties jwtProperties = new JwtProperties();
+    private final JwtProperties jwtProperties;
 
     public JwtProvider() {}
 
