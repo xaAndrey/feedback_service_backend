@@ -1,0 +1,23 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://${DATASOURCE_URL}:${DATASOURCE_PORT}/${DATASOURCE_DATABASE_NAME}
+    hikari:
+      jdbc-url: ${spring.datasource.url}
+      username: ${DATASOURCE_USERNAME}
+      password: ${DATASOURCE_PASSWORD}
+      pool-name: main-db-pool
+      maximum-pool-size: 20
+  jpa:
+    properties:
+      hibernate:
+        default_schema: feedback_service
+    show-sql: false
+    open-in-view: true
+  liquibase:
+    default-schema: feedback_service
+jwt:
+  issuer: ${JWT_ISSUER}
+  access-secret: ${JWT_ACCESS-SECRET}
+  refresh-secret: ${JWT_REFRESH-SECRET}
+  access-token-expiration-time: ${JWT_ACCESS-TOKEN-EXPIRATION-TIME}
+  refresh-token-expiration-time: ${JWT_REFRESH-TOKEN-EXPIRATION-TIME}

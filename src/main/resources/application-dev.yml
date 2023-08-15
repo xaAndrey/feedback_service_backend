@@ -1,0 +1,27 @@
+server:
+  error:
+    include-message: always
+    include-binding-errors: always
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/test_db
+    hikari:
+      jdbc-url: ${spring.datasource.url}
+      schema: feedback_service
+      username: postgres
+      password: postgres
+      pool-name: main-db-pool
+  jpa:
+    properties:
+      hibernate:
+        default_schema: feedback_service
+    show-sql: false
+    open-in-view: true
+jwt:
+  issuer: VISDOM
+  access-secret: FGHJKL21!jwiwQ
+  refresh-secret: YHJKLIO24fW%jwk
+  access-token-expiration-time: 3600000
+  refresh-token-expiration-time: 7200000
+first-boot-user-initialization:
+  enabled: true
